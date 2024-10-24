@@ -61,7 +61,10 @@ tidy:
 .PHONY: build
 build:
 	# Include additional build steps, like TypeScript, SCSS or Tailwind compilation here...
-	go build -o=/tmp/bin/${binary_name} ${main_package_path}
+	go build -ldflags "-s -w" -o=./build/${binary_name} ${main_package_path}
+	strip ./build/${binary_name}
+	# upx ./build/${binary_name}
+
 
 ## run: run the  application
 .PHONY: run
